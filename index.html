@@ -128,7 +128,7 @@
             formData.append("file", file);
 
             // Send file to back-end for processing
-            const response = await fetch("https://schedule-jx24.onrender.com", {
+            const response = await fetch("https://schedule-jx24.onrender.com/upload", {
                 method: "POST",
                 body: formData,
             });
