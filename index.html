@@ -191,7 +191,10 @@
 
         dropdown.addEventListener("change", (e) => {
             const selectedName = e.target.value;
+            console.log("Selected name:", selectedName);  // Debugging
+
             const filteredData = shifts.find(shift => shift.name === selectedName);
+            console.log("Filtered shift data:", filteredData);  // Debugging
 
             if (filteredData) {
                 populateCalendar(filteredData.days);
