@@ -166,7 +166,10 @@
         }
 
         function populateCalendar(days) {
-            calendar.innerHTML = "";
+            console.log("Populating calendar with shifts:", days); // Debugging
+            calendar.innerHTML = ""; // Clear existing calendar
+
+            // Add headers
             const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
             daysOfWeek.forEach(day => {
                 const headerDiv = document.createElement("div");
@@ -175,18 +178,27 @@
                 calendar.appendChild(headerDiv);
             });
 
+            // Populate calendar with shifts
             let currentDate = 1;
-            for (let i = 0; i < 35; i++) {
+            for (let i = 0; i < 35; i++) { // Assuming a 5-week month layout
                 const dayDiv = document.createElement("div");
-                if (i >= 7 && currentDate <= days.length) {
-                    dayDiv.className = `day ${days[currentDate - 1]}`;
-                    dayDiv.textContent = currentDate++;
+                if (i < days.length) {
+                    dayDiv.className = `day ${getShiftClass(days[i])}`;
+                    dayDiv.textContent = days[i];  // Show shift code
                 } else {
                     dayDiv.className = "day off";
                     dayDiv.textContent = "";
                 }
                 calendar.appendChild(dayDiv);
             }
+        }
+
+        // Function to assign shift colors
+        function getShiftClass(shift) {
+            if (["M1", "M2", "M3", "M5"].includes(shift)) return "morning";
+            if (["T1", "T2", "T3", "T5"].includes(shift)) return "late";
+            if (["RT", "P4", "P5"].includes(shift)) return "night";
+            return "off";
         }
 
         dropdown.addEventListener("change", (e) => {
