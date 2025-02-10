@@ -137,11 +137,21 @@
                     throw new Error(`Server error: ${response.status}`);
                 }
 
-                shifts = await response.json();
-                populateDropdown();
+                const data = await response.json();
+                console.log("Received data:", data); // Debugging
+
+                // Ensure data is an array and filter valid shifts
+                if (!Array.isArray(data) || data.length === 0) {
+                    throw new Error("Invalid data format received");
+                }
+
+                shifts = data;  // Assign received data to global variable
+                console.log("Updated shifts:", shifts);  // Debugging
+
+                populateDropdown(); // Refresh the dropdown with new names
             } catch (error) {
                 console.error("Error uploading file:", error);
-                alert("There was an error uploading the file. Please try again.");
+                alert("There was an error processing the file. Please check the format and try again.");
             }
         });
 
