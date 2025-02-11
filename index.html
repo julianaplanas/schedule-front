@@ -22,7 +22,7 @@
         }
         .calendar {
             display: grid;
-            grid-template-columns: 1fr repeat(7, 1fr);
+            grid-template-columns: 1fr repeat(6, 1fr);
             gap: 10px;
         }
         .month-label {
@@ -40,13 +40,13 @@
             background-color: #ffffff;
         }
         .day.morning {
-            background-color: #8fcafa;
-        }
-        .day.late {
-            background-color: #f7a072;
+            background-color: lightgreen;
         }
         .day.night {
-            background-color: #ffc107;
+            background-color: #lightyellow;
+        }
+        .day.cut {
+            background-color: #lightblue;
         }
         .header {
             font-weight: bold;
@@ -74,13 +74,13 @@
             background-color: #ffffff;
         }
         .legend-color.morning {
-            background-color: #8fcafa;
-        }
-        .legend-color.late {
-            background-color: #f7a072;
+            background-color: lightgreen;
         }
         .legend-color.night {
-            background-color: #ffc107;
+            background-color: #lightyellow;
+        }
+        .legend-color.cut {
+            background-color: #lightblue;
         }
     </style>
 </head>
@@ -100,10 +100,10 @@
         </div>
         <div class="legend">
             <h3>Legend</h3>
-            <div class="legend-item"><div class="legend-color off"></div>Day Off</div>
-            <div class="legend-item"><div class="legend-color morning"></div>Morning Shift</div>
-            <div class="legend-item"><div class="legend-color late"></div>Late Shift</div>
-            <div class="legend-item"><div class="legend-color night"></div>Night Shift</div>
+            <div class="legend-item"><div class="legend-color off"></div>Día libre</div>
+            <div class="legend-item"><div class="legend-color morning"></div>Turno mañana</div>
+            <div class="legend-item"><div class="legend-color night"></div>Turno noche</div>
+            <div class="legend-item"><div class="legend-color cut"></div>Horario partido</div>
         </div>
     </div>
 
@@ -195,9 +195,9 @@
 
         // Function to assign shift colors
         function getShiftClass(shift) {
-            if (["M1", "M2", "M3", "M5"].includes(shift)) return "morning";
-            if (["T1", "T2", "T3", "T5"].includes(shift)) return "late";
-            if (["RT", "P4", "P5"].includes(shift)) return "night";
+            if (["RM", "M1", "M2", "M3", "M5"].includes(shift)) return "morning";
+            if (["S", "P2", "P3", "P4", "P5"].includes(shift)) return "cut";
+            if (["RT", "T1", "T2", "T3", "T5"].includes(shift)) return "night";
             return "off";
         }
 
